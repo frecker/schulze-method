@@ -55,8 +55,8 @@
           (combine-equal
            (lambda (t1 t2)
              (and
-              (eqv? (car t1) (car t2))
-              (eqv? (cdr t1) (cdr t2))))
+              (equal? (car t1) (car t2))
+              (equal? (cdr t1) (cdr t2))))
            + all-values)))
       together)))
 

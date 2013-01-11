@@ -39,7 +39,7 @@
 	   (actual-value (cdr actual-node))
 	   (new-value
 	    (cond
-	     ((or (eqv? inner-node start-node) (eqv? inner-node dest-node))
+	     ((or (equal? inner-node start-node) (equal? inner-node dest-node))
 	      actual-value)
 	     (else
 	      (let*
@@ -61,7 +61,7 @@
 	((first (car graph))
 	 (rest (cdr graph)))
       (cond
-       ((and (eqv? x (car (car first))) (eqv? y (cdr (car first)))) first)
+       ((and (equal? x (car (car first))) (equal? y (cdr (car first)))) first)
        (else (search-node x y rest))))))
 
 (define compute-better-than-tail
@@ -77,8 +77,8 @@
 	 (rest (cdr graph)))
       (cond
        ((and
-	 (eqv? (starting-node first) (destination-node candidate))
-	 (eqv? (destination-node first) (starting-node candidate)))
+	 (equal? (starting-node first) (destination-node candidate))
+	 (equal? (destination-node first) (starting-node candidate)))
 	(let
 	    ((value-candidate (value candidate))
 	     (value-first (value first)))
@@ -134,7 +134,7 @@
   (lambda (node graph full-graph)
     (cond
      ((null? graph) #f)
-     ((not (eqv? (car node) (car (car graph))))
+     ((not (equal? (car node) (car (car graph))))
       (is-dominated node (cdr graph) full-graph))
      ((is-dominated-help (cdr (car graph)) (cdr node) full-graph) #t)
      (else (is-dominated node (cdr graph) full-graph)))))
@@ -144,6 +144,6 @@
     (cond
      ((null? graph) #f)
      ((and
-       (eqv? first (car (car graph)))
-       (eqv? rest (cdr (car graph)))) #t)
+       (equal? first (car (car graph)))
+       (equal? rest (cdr (car graph)))) #t)
      (else (is-dominated-help first rest (cdr graph))))))

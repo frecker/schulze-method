@@ -100,7 +100,7 @@
      ((null? ys)
       (begin
        (error "error while deleting an element:" x)))
-     ((eqv? x (car ys)) (cdr ys))
+     ((equal? x (car ys)) (cdr ys))
      (else (cons (car ys) (rm-element-secure x (cdr ys)))))))
 
 (define break
@@ -128,5 +128,5 @@
   (lambda (x ys)
     (cond
      ((null? ys) #f)
-     ((eqv? x (car ys)) #t)
+     ((equal? x (car ys)) #t)
      (else (elem-of x (cdr ys))))))
