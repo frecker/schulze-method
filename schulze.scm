@@ -3,7 +3,11 @@
 (load "graph.scm")
 
 ;;; external functions
-(define choices
+(define-macro choices
+  (lambda ls
+  `(choices-fun (quote ,ls))))
+
+(define choices-fun
   (lambda (ls)
     (cond
      ((list? ls) (set! choices-set ls))
@@ -11,7 +15,11 @@
       (begin
        (error "choices without set"))))))
 
-(define vote
+(define-macro vote
+  (lambda ls
+  `(vote-fun (quote ,ls))))
+
+(define vote-fun
   (lambda (ls)
     (cond
      ((list? ls) (set! votes (cons ls votes)))
